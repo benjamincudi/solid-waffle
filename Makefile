@@ -9,3 +9,8 @@ db-up: build-db
 .PHONY: dump-schema
 dump-schema:
 	pg_dump -c -s -U postgres -h localhost waffle > db/structure.sql
+
+# Run using 'make new-migration NAME=<name>'
+.PHONY: new-migration
+new-migration:
+	sql-migrate new -config=dbconfig.yml -env=development $(NAME)
