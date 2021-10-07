@@ -1,9 +1,10 @@
 # Binaries for programs and plugins
 *.exe
-*.exe~
-*.dll
-*.so
-*.dylib
+*.log
+.idea/
+.DS_Store
+Thumbs.db
+*.app
 
 # Test binary, built with `go test -c`
 *.test
