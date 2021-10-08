@@ -22,6 +22,7 @@ SET row_security = off;
 
 COPY public.migrations (id, applied_at) FROM stdin;
 20211007194628-make-sellers.sql	2021-10-08 00:38:21.729698+00
+20211007211946-make-products.sql	2021-10-08 01:22:36.385334+00
 \.
 
 

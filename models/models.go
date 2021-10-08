@@ -12,3 +12,9 @@ type Seller struct {
 	DefaultDBFields `bulkprocess:"substruct"`
 	Name            string `db:"name" json:"name"`
 }
+
+type Product struct {
+	DefaultDBFields `bulkprocess:"substruct"`
+	Name            string `db:"name" json:"name"`
+	SellerID        int    `db:"seller_id" json:"seller_id"`
+}

@@ -48,7 +48,8 @@ func mapRoutesToHandlers(r methodRegistrar, routeMap gin.H) {
 func AttachRouteHandlers(r methodRegistrar) {
 	ds := waffledb.MustGetDS(context.Background())
 	routeMap := gin.H{
-		"/api/sellers": handlers.SellersController{DS: ds},
+		"/api/sellers":  handlers.SellersController{DS: ds},
+		"/api/products": handlers.ProductsController{DS: ds},
 	}
 	mapRoutesToHandlers(r, routeMap)
 }
