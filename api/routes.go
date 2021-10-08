@@ -51,6 +51,7 @@ func AttachRouteHandlers(r methodRegistrar) {
 		"/api/sellers":            handlers.SellersController{DS: ds},
 		"/api/products":           handlers.ProductsController{DS: ds},
 		"/api/product_variations": handlers.ProductVariationsController{DS: ds},
+		"/api/new_product":        handlers.ProductCreateController{DS: ds},
 	}
 	mapRoutesToHandlers(r, routeMap)
 }
