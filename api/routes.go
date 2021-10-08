@@ -1,8 +1,11 @@
 package api
 
 import (
+	"context"
 	"fmt"
 	"reflect"
+	"solid-waffle/api/handlers"
+	"solid-waffle/waffledb"
 
 	"github.com/gin-gonic/gin"
 )
@@ -43,6 +46,9 @@ func mapRoutesToHandlers(r methodRegistrar, routeMap gin.H) {
 }
 
 func AttachRouteHandlers(r methodRegistrar) {
-	routeMap := gin.H{}
+	ds := waffledb.MustGetDS(context.Background())
+	routeMap := gin.H{
+		"/api/sellers": handlers.SellersController{DS: ds},
+	}
 	mapRoutesToHandlers(r, routeMap)
 }
