@@ -16,6 +16,96 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE ONLY public.sellers DROP CONSTRAINT sellers_pkey;
+ALTER TABLE ONLY public.sellers DROP CONSTRAINT sellers_name_key;
+ALTER TABLE ONLY public.migrations DROP CONSTRAINT migrations_pkey;
+ALTER TABLE public.sellers ALTER COLUMN id DROP DEFAULT;
+DROP SEQUENCE public.sellers_id_seq;
+DROP TABLE public.sellers;
+DROP TABLE public.migrations;
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.migrations (
+    id text NOT NULL,
+    applied_at timestamp with time zone
+);
+
+
+ALTER TABLE public.migrations OWNER TO postgres;
+
+--
+-- Name: sellers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.sellers (
+    id integer NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    name text NOT NULL
+);
+
+
+ALTER TABLE public.sellers OWNER TO postgres;
+
+--
+-- Name: sellers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.sellers_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sellers_id_seq OWNER TO postgres;
+
+--
+-- Name: sellers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.sellers_id_seq OWNED BY public.sellers.id;
+
+
+--
+-- Name: sellers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sellers ALTER COLUMN id SET DEFAULT nextval('public.sellers_id_seq'::regclass);
+
+
+--
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.migrations
+    ADD CONSTRAINT migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sellers sellers_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sellers
+    ADD CONSTRAINT sellers_name_key UNIQUE (name);
+
+
+--
+-- Name: sellers sellers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.sellers
+    ADD CONSTRAINT sellers_pkey PRIMARY KEY (id);
+
+
 --
 -- PostgreSQL database dump complete
 --
